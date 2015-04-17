@@ -32,7 +32,7 @@ class IpAccess
     }
 
 
-    protected function updateAllIps()
+    public function updateAllIps()
     {
         $objHostnames = IpAccessModel::findAll();
 
