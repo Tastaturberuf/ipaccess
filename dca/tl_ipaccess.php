@@ -20,8 +20,7 @@ $GLOBALS['TL_DCA']['tl_ipaccess'] = array
         (
             'keys' => array
             (
-                'id'       => 'primary',
-                'hostname' => 'unique'
+                'id' => 'primary'
             )
         )
     ),
