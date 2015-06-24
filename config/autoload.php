@@ -25,9 +25,12 @@ ClassLoader::addNamespaces(array
  */
 ClassLoader::addClasses(array
 (
-	// Classes
-	'ipaccess\IpAccess'      => 'system/modules/ipAccess/classes/IpAccess.php',
-
 	// Models
 	'ipaccess\IpAccessModel' => 'system/modules/ipAccess/models/IpAccessModel.php',
+
+	// Dcac
+	'ipaccess\tl_ipaccess'   => 'system/modules/ipAccess/dcac/tl_ipaccess.php',
+
+	// Classes
+	'ipaccess\IpAccess'      => 'system/modules/ipAccess/classes/IpAccess.php',
 ));

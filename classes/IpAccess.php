@@ -18,13 +18,27 @@ class IpAccess
 
     public function initializeSystem()
     {
-        $strRemoteIp = \Environment::get('remoteAddr');
-        $strServerIp = \Environment::get('serverAddr');
-
-        if ( $this->cutIp($strRemoteIp) != $this->cutIp($strServerIp) )
+        if ( \Config::get('enableIpAccess') )
         {
-            if ( ($objHostname = IpAccessModel::findBy('ip', $strRemoteIp)) == null )
+            // Get remote ip tokens
+            $arrIpToken  = explode('.', \Environment::get('remoteAddr'));
+
+            // Build regex pattern
+            $strRgxp = sprintf('^(%d|\\\*).(%d|\\\*).(%d|\\\*).(%d|\\\*)$',
+                $arrIpToken[0],
+                $arrIpToken[1],
+                $arrIpToken[2],
+                $arrIpToken[3]
+            );
+
+            // Build query
+            $strQuery = "SELECT * FROM tl_ipaccess WHERE ip REGEXP '$strRgxp'";
+
+            // If no pattern match
+            if ( !\Database::getInstance()->query($strQuery)->numRows )
             {
+                \System::log("Blocked access for '{$strRemoteIp}'", __METHOD__, TL_ERROR);
+
                 $objPage = new $GLOBALS['TL_PTY']['error_403']();
                 $objPage->generate(\Frontend::getPageIdFromUrl());
             }
@@ -57,7 +71,7 @@ class IpAccess
 
         $strIp = gethostbyname($objHostname->hostname);
 
-        if ( $this->isIp($strIp) )
+        if ( $this->validateIp($strIp) )
         {
             $objHostname->tstamp = time();
             $objHostname->ip     = $strIp;
@@ -74,19 +88,9 @@ class IpAccess
      * @param string $strIp
      * @return bool
      */
-    protected function isIp($strIp)
+    protected function validateIp($strIp)
     {
         return (boolean) filter_var($strIp, FILTER_VALIDATE_IP);
-    }
-
-
-    /**
-     * @param string $strIp
-     * @return string
-     */
-    protected function cutIp($strIp)
-    {
-        return substr($strIp, 0, strrpos($strIp, '.'));
     }
 
 }

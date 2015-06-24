@@ -132,16 +132,3 @@ $GLOBALS['TL_DCA']['tl_ipaccess'] = array
     )
 
 );
-
-
-class tl_ipaccess
-{
-
-    public function formatDate($row, $label, DataContainer $dc, $args)
-    {
-        $args[0] = \Date::parse(\Config::get('datimFormat'), $args[0]);
-
-        return $args;
-    }
-
-}

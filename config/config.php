@@ -270,3 +270,4 @@ $GLOBALS['TL_HOOKS']['initializeSystem'][] = array('IpAccess', 'initializeSystem
  * When rebuilding the search index URLs, Contao needs to know about these
  * keywords so it can handle them properly.
  */
+$GLOBALS['TL_DEBUG'][_] = $_SERVER;
