@@ -39,7 +39,7 @@ class IpAccess
             // If no pattern match
             if ( !\Database::getInstance()->query($strQuery)->numRows )
             {
-                \System::log("Blocked access for '{$strRemoteIp}'", __METHOD__, TL_ERROR);
+                \System::log("Blocked access for '{$strRemoteAddr}'", __METHOD__, TL_ERROR);
 
                 $objPage = new $GLOBALS['TL_PTY']['error_403']();
                 $objPage->generate(\Frontend::getPageIdFromUrl());
