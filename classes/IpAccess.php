@@ -18,10 +18,12 @@ class IpAccess
 
     public function initializeSystem()
     {
-        if ( \Config::get('enableIpAccess') )
+        $strRemoteAddr = \Environment::get('remoteAddr');
+
+        if ( \Config::get('enableIpAccess') && $this->validateIp($strRemoteAddr) )
         {
             // Get remote ip tokens
-            $arrIpToken  = explode('.', \Environment::get('remoteAddr'));
+            $arrIpToken  = explode('.', $strRemoteAddr);
 
             // Build regex pattern
             $strRgxp = sprintf('^(%d|\\\*).(%d|\\\*).(%d|\\\*).(%d|\\\*)$',
