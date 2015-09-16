@@ -40,6 +40,7 @@
 $GLOBALS['BE_MOD']['system']['ipaccess'] = array
 (
     'tables' => array('tl_ipaccess'),
+    'update' => array('tl_ipaccess', 'updateAllIps'),
     'icon'   => 'logout.gif'
 );
 

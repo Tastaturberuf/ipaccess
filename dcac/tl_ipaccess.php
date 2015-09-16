@@ -21,4 +21,14 @@ class tl_ipaccess
         return $args;
     }
 
+
+    public function updateAllIps()
+    {
+        $ipAccess = new IpAccess();
+        $ipAccess->updateAllIps();
+
+        \Message::addInfo($GLOBALS['TL_LANG']['tl_ipaccess']['msg']);
+        \Controller::redirect(\Controller::getReferer());
+    }
+
 }

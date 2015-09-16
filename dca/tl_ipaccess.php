@@ -42,12 +42,18 @@ $GLOBALS['TL_DCA']['tl_ipaccess'] = array
         ),
         'global_operations' => array
         (
+            'update' => array
+            (
+                'label' => &$GLOBALS['TL_LANG']['tl_ipaccess']['update'],
+                'href'  => 'key=update',
+                'class' => 'header_sync'
+            ),
             'all' => array
             (
-                'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
-                'href'                => 'act=select',
-                'class'               => 'header_edit_all',
-                'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
+                'label'      => &$GLOBALS['TL_LANG']['MSC']['all'],
+                'href'       => 'act=select',
+                'class'      => 'header_edit_all',
+                'attributes' => 'onclick="Backend.getScrollOffset()" accesskey="e"'
             )
         ),
         'operations' => array
@@ -95,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_ipaccess'] = array
         (
             'label'   => &$GLOBALS['TL_LANG']['tl_ipaccess']['tstamp'],
             'sorting' => true,
-            'flag'    => 1,
+            'flag'    => 12,
             'sql'     => "int(10) unsigned NOT NULL default '0'"
         ),
         'hostname' => array
