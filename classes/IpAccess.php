@@ -20,7 +20,7 @@ class IpAccess
     {
         $strRemoteAddr = \Environment::get('remoteAddr');
 
-        if ( \Config::get('enableIpAccess') && $this->validateIp($strRemoteAddr) )
+        if ( \Config::get('enableIpAccess') && PHP_SAPI != 'cli' )
         {
             // Get remote ip tokens
             $arrIpToken  = explode('.', $strRemoteAddr);
