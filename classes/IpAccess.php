@@ -41,6 +41,7 @@ class IpAccess
             {
                 \System::log("Blocked access for '{$strRemoteAddr}'", __METHOD__, TL_ERROR);
 
+                // error page
                 $objPage = new $GLOBALS['TL_PTY']['error_403']();
                 $objPage->generate(\Frontend::getPageIdFromUrl());
             }
@@ -75,9 +76,12 @@ class IpAccess
 
         if ( $this->validateIp($strIp) )
         {
-            $objHostname->tstamp = time();
-            $objHostname->ip     = $strIp;
-            $objHostname->save();
+            if ( $objHostname->ip != $strIp )
+            {
+                $objHostname->tstamp = time();
+                $objHostname->ip     = $strIp;
+                $objHostname->save();
+            }
         }
         else
         {
